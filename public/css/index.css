@@ -1,0 +1,37 @@
+.container-index {
+    flex-basis: 20%;
+    padding: 2em;
+    margin-top: 60px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: row; 
+    justify-content: space-between; 
+}
+
+.container-index .links-index {
+    display: flex;
+    flex-basis: 48%; 
+    padding: 1em;
+    font-size: 1.2em;
+    font-weight: bold;
+    text-decoration: none;
+    color: #39A900;
+    background-color: #f5f5f5;
+    border-radius: 5px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    box-sizing: border-box;
+    margin-top: 0;
+    justify-content: center; 
+}
+
+.links-index:hover {
+    background-color: #39A900;
+    color: #fff;
+}
+
+h1{
+    text-align: center;
+    padding-top: 40px;
+}

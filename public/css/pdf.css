@@ -1,0 +1,53 @@
+/* resources/css/pdf_styles.css */
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+    text-align: center;
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+#tabla-computadores {
+    width: 80%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    font-size: 12px;
+    table-layout: auto;
+    word-wrap: break-word;
+}
+
+#tabla-computadores th, #tabla-computadores td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #000; /* Línea en la parte inferior de cada celda */
+}
+
+#tabla-computadores th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+#tabla-computadores tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+#tabla-computadores ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+#tabla-computadores ul li {
+    margin-bottom: 5px;
+    line-height: 1.4;
+}
