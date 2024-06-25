@@ -33,7 +33,7 @@
                     <li><a href="{{ route('entregar.aprendiz')}}" class="nav-link"><i class="fas fa-check-circle"></i> Entregar préstamo apréndiz</a></li>
                     <li> <a href="{{ route('vistaPrestamoAprendiz')}}" class="nav-link"><i class="fa fa-notes-medical"></i>&nbsp;Agregar componente apréndiz</a></li>
                     <li><a href="{{ route('entregar.instructor')}}" class="nav-link"><i class="fas fa-check-circle"></i> Entregar préstamo instructor</a></li>
-                    <a href="{{ route('vistaPrestamoInstructor') }}" class="nav-link"><i class="fa fa-notes-medical"></i>&nbsp;Agregar componente instructor</a>
+                    <a href="{{ route('index.form.instructor') }}" class="nav-link"><i class="fa fa-notes-medical"></i>&nbsp;Agregar componente instructor</a>
                     <li></li>
                     <li class="dropdown-container">
                         <a href="#" id="prestamos-hoy-dropdown" class="nav-link">

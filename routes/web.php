@@ -48,15 +48,19 @@ Route::get('/descargar-pdf-instructor',[ComputadorController::class, 'instructor
 //Descarga en formato PDF la lista de préstamos a lo largo del tiempo
 Route::get('/descargar-pdf-listado-instructor',[ComputadorController::class, 'listadoInstructorPdf'])->name('pdf.listadoInstructor');
 
+                            //Esta ruta fue la que me dio problema y me aparecia el error 404 ( la dejo por si algo)
+                // Route::get('/buscar-prestamo-componente-instructor',[ComputadorController::class, 'vistaPrestamoInstructor'])->name('vistaPrestamoInstructor');
 
 //Se trae la información de los préstamos para posteriormente actualizar sus componentes
-Route::get('/buscar-prestamo-componente-instructor',[ComputadorController::class, 'vistaPrestamoInstructor'])->name('vistaPrestamoInstructor');
+Route::get('/componente-form-instructor', [ComputadorController::class, 'vistaPrestamoInstructor'])->name('index.form.instructor');
 
 
 
+                        //Esta fue la otra ruta del error
+                // Route::get('/buscar-prestamo-componente-instructor-{id}',[ComputadorController::class, 'editInstructor'])->name('edit.instructor');
 
 //Se crea el formulario el cual trae el registro del préstamo
-Route::get('/buscar-prestamo-componente-instructor-{id}',[ComputadorController::class, 'editInstructor'])->name('edit.instructor');
+Route::get('/componente-form-instructor-{id}', [ComputadorController::class, 'editInstructor'])->name('instructor.edit');
 //Se realiza y se guarda el registro del componente actualizado
 Route::put('/buscar-prestamo-componente-instructor-{id}-exitoso', [ComputadorController::class, 'updateInstructor'])->name('instructor.update');
 
@@ -75,7 +79,3 @@ Route::get('/buscar-prestamo-general',[ComputadorController::class, 'buscarGener
 //Se busca por fecha y se descarga en formato PDF todos los préstamos de ese día
 Route::get('/descargar-pdf-listado-general',[ComputadorController::class, 'generalPdf'])->name('pdf.general');
 
-
-Route::get('/test', function() {
-    return 'Ruta de prueba funcionando';
-});

@@ -9,6 +9,7 @@ use App\Models\ComputadorComponente;
 use Dompdf\Dompdf;
 use Dompdf\Options;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class ComputadorController extends Controller
 {
@@ -366,38 +367,41 @@ public function generalPdf(Request $request)
     return $pdf->stream('reporte_préstamos.pdf');
 }
 
+
 public function listadoGeneralPdf()
 {
-    // Consultar los computadores con la fecha especificada
+    // Consultar los computadores
     $computadores = Computador::with('componentes')->get();
+    
+    $encabezado = "Reporte de préstamos general";
+    
+    // Logo imagen
+    $logo = public_path('img/logoSenaa.png');
 
-    $encabezado = "Reporte de préstamos";
-
-    // Logo de la imagen
-    $logo = public_path('img/logoSena.png');
-
+    
+    
     // Renderizar la vista en HTML
     $html = view('pdf.listadoGeneralPdf', compact('computadores', 'encabezado', 'logo'))->render();
-
+    
     // Configuración de DomPDF
     $options = new Options();
     $options->set('isHtml5ParserEnabled', true);
+    $options->set('isPhpEnabled', true);
     $options->set('defaultFont', 'Arial');
+    
     $pdf = new Dompdf($options);
-
+    
     // Cargar el HTML en DomPDF
     $pdf->loadHtml($html);
-
+    
     // Configurar el tamaño del papel y la orientación
     $pdf->setPaper('A4', 'portrait');
-
+    
     // Renderizar el PDF
     $pdf->render();
-
+    
     // Enviar el PDF generado al navegador
-    return $pdf->stream('reporte_préstamos.pdf', [
-        'Content-Disposition' => 'attachment; filename="reporte_prestamos.pdf"'
-    ]);
+    return $pdf->stream('reporte_préstamos_general.pdf');
 }
 
 public function listadoInstructorPdf()

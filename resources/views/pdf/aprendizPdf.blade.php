@@ -5,78 +5,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <style>
-    body {
-        font-family: 'Arial', sans-serif;
-        line-height: 1.6;
-        color: #333;
-        margin: 0;
-        padding: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .header {
-        background-color: #ddd;
-        padding: 1em;
-        text-align: center
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            margin: 0;
+            padding: 0;
         }
-
-    .logo {
-        display: block;
-        margin: 0 auto;
-        max-width: 60px;  
-    }
-
-    h3 {
-        font-size: 24px;
-        color: #39A900;
-        margin-bottom: 20px;
-    }
-
-    #tabla-computadores {
-        width: 80%;
-        margin: 20px auto;
-        background-color: #ffffff;
-        border: 1px solid #dddddd;
-        border-collapse: collapse;
-        font-size: 14px;
-        table-layout: auto;
-        word-wrap: break-word;
-    }
-
-    #tabla-computadores th, #tabla-computadores td {
-        padding: 10px;
-        text-align: left;
-        border-bottom: 1px solid #dddddd; 
-    }
-
-    #tabla-computadores th {
-        background-color: #39A900; 
-        color: #ffffff; 
-        font-weight: bold;
-        border-bottom: 2px solid #337f0a; 
-    }
-
-    #tabla-computadores tbody tr:nth-child(even) {
-        background-color: #f2f2f2; 
-    }
-
-    #tabla-computadores ul {
-        margin: 0;
-        padding: 0;
-        list-style-type: none;
-    }
-
-    #tabla-computadores ul li {
-        margin-bottom: 5px;
-        line-height: 1.4;
-    }
-
-  
-   
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .logo {
+            max-width: 60px;
+            margin: 0 auto;
+        }
+        h3 {
+            font-size: 24px;
+            color: #39A900;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        #tabla-computadores {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+        }
+        #tabla-computadores th, #tabla-computadores td {
+            border: 1px solid #dddddd;
+            padding: 8px;
+            text-align: left;
+        }
+        #tabla-computadores th {
+            background-color: #39A900;
+            color: #ffffff;
+            font-weight: bold;
+        }
+        #tabla-computadores tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+        
     </style>
 </head>
 <body>
@@ -116,7 +88,7 @@
                             @endforeach
                         </ul>
                     </td>
-                    <td style="text-align: center">{{ $computador->serial }}</td>
+                    <td>{{ $computador->serial ?? 'N/A' }}</td>
                     <td>
                         @if ($computador->estado == 1)
                             <div>

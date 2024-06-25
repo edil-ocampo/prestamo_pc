@@ -12,7 +12,7 @@
 <div class="form-container">
 
 
-    <form action="{{ route('vistaPrestamoInstructor') }}" method="GET" >
+    <form action="{{ route('index.form.instructor') }}" method="GET" >
         
         <div class="form-group">
             <label>Ingrese el nombre o apellido:</label>
@@ -68,7 +68,7 @@
                             </td>
                             <td>
                                 
-                                <a href="{{ route('edit.instructor', $computador->id )}}" class="link-entregar">Agregar Componente</a>
+                                <a href="{{ route('instructor.edit', $computador->id )}}" class="link-entregar">Agregar Componente</a>
                             
                          </td>
                         </tr>
