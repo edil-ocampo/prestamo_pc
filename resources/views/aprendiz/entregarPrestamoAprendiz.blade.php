@@ -1,5 +1,4 @@
 @extends('layouts.app')
-@section('title','Buscar prestamos')
 @section('style')
 <link rel="stylesheet" href="{{ asset('css/listas.css') }}">
 
@@ -8,12 +7,12 @@
 
 <div class="container">
     @section('title-section','Entregar préstamo aprendiz')
-    
+
 <div class="form-container">
 
 
     <form action="{{ route('entregar.aprendiz') }}" method="GET" >
-        
+
         <div class="form-group">
             <label>Ingrese el documento:</label>
             <input type="number"  name="documento" class="input">
@@ -38,7 +37,7 @@
                         <th>Componentes</th>
                         <th>Estado</th>
                         <th>Acciones</th>
-                       
+
                     </tr>
                 </thead>
                 <tbody>

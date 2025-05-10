@@ -4,20 +4,18 @@
 
 @section('style')
     <link rel="stylesheet" href="{{ asset('css/listas.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/paginacion.css') }}">
 @endsection
 
-@section('content')
 @section('title-section','Listado de préstamos aprendices hoy')
 @section('total-prestamos')
-<div class="total-instructor">   
+@section('content')
+<div class="total-instructor">
     <label class="label">Total de préstamos hoy:</label>
 <h1>{{ $totalRegistros }}</h1>
 </div>
 <br>
     <div class="container">
-      
-        
-
         @if (session('success'))
             <div class="alert alert-success">
                 {{ session('success') }}
@@ -74,5 +72,6 @@
                 </tbody>
             </table>
         @endif
+        {{ $computadores->links('vendor.pagination.default') }}
     </div>
 @endsection

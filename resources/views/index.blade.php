@@ -1,5 +1,4 @@
 @extends('layouts.app')
-@section('title', 'SENA Presta')
 @section('style')
 <link rel="stylesheet" href="{{ asset('css/index.css') }}">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -16,12 +15,23 @@
 
 @section('title-section', '¿A quién va dirigido el préstamo?')
 
-<div class="container-index">
-    <a href="{{ route('registro') }}" class="links-index">
-        <i class="fas fa-user-graduate"></i>&nbsp;Aprendiz
-    </a>
-    <a href="{{ route('registro.instructor') }}" class="links-index">
-        <i class="fas fa-chalkboard-teacher"></i>&nbsp;Instructor
-    </a>
+<div class="container-main">
+    <h2 class="section-title">Seleccione el tipo de usuario</h2>
+
+    <div class="cards-container">
+        <a href="{{ route('registro') }}" class="card-option">
+            <div class="card-icon">
+                <i class="fas fa-user-graduate"></i>
+            </div>
+            <div class="card-label">Aprendiz</div>
+        </a>
+
+        <a href="{{ route('registro.instructor') }}" class="card-option">
+            <div class="card-icon">
+                <i class="fas fa-chalkboard-teacher"></i>
+            </div>
+            <div class="card-label">Instructor</div>
+        </a>
+    </div>
 </div>
 @endsection

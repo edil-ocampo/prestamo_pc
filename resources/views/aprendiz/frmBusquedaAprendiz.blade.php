@@ -2,6 +2,7 @@
 @section('title','Buscar préstamos')
 @section('style')
 <link rel="stylesheet" href="{{ asset('css/listas.css') }}">
+<link rel="stylesheet" href="{{ asset('css/paginacion.css') }}">
 @endsection
 @section('content')
 <div class="container">
@@ -19,7 +20,7 @@
         <div class="total">
             <h1 style="text-align: center">{{ $totalRegistros }}</h1>
         </div>
-        
+
     </div>
     @if (!is_null($computadores))
         @if ($computadores->isEmpty())
@@ -72,6 +73,7 @@
                     <i class="fas fa-file-pdf"></i>
                 </a>
             @endif
+            {{ $computadores->links('vendor.pagination.default') }}
         @endif
     @endif
 </div>

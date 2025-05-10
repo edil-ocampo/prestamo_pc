@@ -2,13 +2,11 @@
 @section('title','Buscar prestamos')
 @section('style')
 <link rel="stylesheet" href="{{ asset('css/listas.css') }}">
-
-
+<link rel="stylesheet" href="{{ asset('css/paginacion.css') }}">
 @section('content')
-
 <div class="container">
     @section('title-section','Buscar préstamo de aprendices e instructores por fecha')
-    
+
 <div class="form-container">
 
 
@@ -21,7 +19,7 @@
     </form>
     <br><br><br>
     <label>Total de prestamos en esta fecha:</label>
-    <div class="total">   
+    <div class="total">
         <h1 style="text-align: center">{{ $totalRegistros }}</h1>
     </div>
 </div>
@@ -42,7 +40,7 @@
                         <th>Componentes</th>
                         <th>Serial del computador</th>
                         <th>Estado</th>
-                       
+
                     </tr>
                 </thead>
                 <tbody>
@@ -80,6 +78,7 @@
                     <i class="fas fa-file-pdf"></i>
                 </a>
             @endif
+            {{ $computadores->links('vendor.pagination.default') }}
         @endif
     @endif
 </div>

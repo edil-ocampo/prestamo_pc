@@ -2,12 +2,13 @@
 @section('title','Buscar prestamos')
 @section('style')
 <link rel="stylesheet" href="{{ asset('css/listas.css') }}">
+<link rel="stylesheet" href="{{ asset('css/paginacion.css') }}">
 
 @section('content')
 
 <div class="container">
     @section('title-section','Buscar préstamo de instructor por fecha')
-    
+
     <div class="form-container">
     <form action="{{ route('buscar.instructor') }}" method="GET" >
         <div class="form-group">
@@ -18,7 +19,7 @@
     </form>
     <br><br><br>
     <label>Total de prestamos en esta fecha:</label>
-    <div class="total">   
+    <div class="total">
         <h1 style="text-align: center">{{ $totalRegistros }}</h1>
     </div>
     </div>
@@ -34,18 +35,18 @@
             <table id="tabla-computadores">
                 <thead>
                     <tr>
-                      
+
                         <th>Nombre y Apellido</th>
                         <th>Fecha</th>
                         <th>Componentes</th>
                         <th>Estado</th>
-                       
+
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($computadores as $computador)
                         <tr>
-                       
+
                             <td>{{ $computador->nombres }}</td>
                             <td>{{ $computador->fecha }}</td>
                             <td>
@@ -77,6 +78,7 @@
                 </a>
             @endif
         @endif
+        {{ $computadores->links('vendor.pagination.default') }}
     @endif
 </div>
 @endsection

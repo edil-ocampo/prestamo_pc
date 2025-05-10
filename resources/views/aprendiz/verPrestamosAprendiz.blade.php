@@ -1,11 +1,11 @@
 @extends('layouts.app')
-@section('title','Listado prestamos aprendiiz')
 @section('style')
 <link rel="stylesheet" href="{{ asset('css/listas.css')}}">
-@section('content')
+<link rel="stylesheet" href="{{ asset('css/paginacion.css')}}">
 @section('title-section','Listado completo de los préstamos a los aprendices')
 @section('total-prestamos')
-<div class="total-instructor">   
+@section('content')
+<div class="total-instructor">
     <label class="label">Total de préstamos aprendices:</label>
 <h1>{{ $totalRegistros }}</h1>
 </div>
@@ -51,11 +51,11 @@
             </tr>
         @endforeach
     </tbody>
-    <a href="{{ route('pdf.listadoAprendiz') }}" class="pdf-download-link" download>
-        <i class="fas fa-file-pdf"></i>
-    </a>
-    
 </table>
+{{ $computadores->links('vendor.pagination.default') }}
+<a href="{{ route('pdf.listadoAprendiz') }}" class="pdf-download-link" download>
+    <i class="fas fa-file-pdf"></i>
+</a>
 
 
 @endsection

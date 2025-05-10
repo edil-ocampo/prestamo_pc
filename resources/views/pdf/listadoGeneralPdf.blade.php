@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Reporte de Préstamos</title>
     <style>
         body {
@@ -56,9 +55,9 @@
     {{-- <div class="header">
         <img src="{{ $logo }}" alt="logo-sena" class="logo">
     </div> --}}
-
+    
     <h3>{{ $encabezado }}</h3>
-
+    
     <table id="tabla-computadores">
         <thead>
             <tr>
@@ -74,7 +73,7 @@
             @foreach ($computadores as $computador)
                 <tr>
                     <td>{{ $computador->documento ?? 'N/A' }}</td>
-                    <td style="font-size: 16px">{{ $computador->nombres }}</td>
+                    <td>{{ $computador->nombres }}</td>
                     <td>{{ $computador->fecha }}</td>
                     <td>
                         <ul>
@@ -86,13 +85,9 @@
                     <td style="text-align: center">{{ $computador->serial ?? 'N/A' }}</td>
                     <td>
                         @if ($computador->estado == 1)
-                            <div>
-                                <h4>Sin entregar</h4>
-                            </div>
+                            Sin entregar
                         @else
-                            <div>
-                                <h4>Entregado</h4>
-                            </div>
+                            Entregado
                         @endif
                     </td>
                 </tr>

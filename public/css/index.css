@@ -1,37 +1,91 @@
-.container-index {
-    flex-basis: 20%;
-    padding: 2em;
-    margin-top: 60px;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: row; 
-    justify-content: space-between; 
+:root {
+    --primary-color: #39A900;
+    --primary-hover: #2e8600;
+    --background-light: #f8f9fa;
+    --text-dark: #333;
+    --border-radius: 8px;
+    --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    --transition: all 0.3s ease;
 }
 
-.container-index .links-index {
-    display: flex;
-    flex-basis: 48%; 
-    padding: 1em;
-    font-size: 1.2em;
-    font-weight: bold;
-    text-decoration: none;
-    color: #39A900;
-    background-color: #f5f5f5;
-    border-radius: 5px;
-    transition: background-color 0.2s ease, color 0.2s ease;
-    box-sizing: border-box;
-    margin-top: 0;
-    justify-content: center; 
+.container-main {
+    max-width: 800px;
+    margin: 60px auto;
+    padding: 40px;
+    background-color: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
 }
 
-.links-index:hover {
-    background-color: #39A900;
-    color: #fff;
-}
-
-h1{
+.section-title {
     text-align: center;
-    padding-top: 40px;
+    color: var(--text-dark);
+    font-weight: 500;
+    margin-bottom: 40px;
+    font-size: 1.5rem;
+}
+
+.cards-container {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+}
+
+.card-option {
+    flex: 1;
+    max-width: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px 20px;
+    background-color: var(--background-light);
+    border-radius: var(--border-radius);
+    text-decoration: none;
+    color: var(--text-dark);
+    transition: var(--transition);
+    border: 1px solid #eaeaea;
+}
+
+.card-option:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--box-shadow);
+    border-color: var(--primary-color);
+}
+
+.card-icon {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 15px;
+    transition: var(--transition);
+}
+
+.card-label {
+    font-size: 1.1rem;
+    font-weight: 500;
+    text-align: center;
+    transition: var(--transition);
+}
+
+.card-option:hover .card-icon,
+.card-option:hover .card-label {
+    color: var(--primary-hover);
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    .container-main {
+        padding: 25px;
+        margin: 30px 15px;
+    }
+
+    .cards-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .card-option {
+        width: 100%;
+        max-width: 250px;
+    }
 }

@@ -9,25 +9,26 @@ use App\Models\ComputadorComponente;
 use Dompdf\Dompdf;
 use Dompdf\Options;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class ComputadorController extends Controller
 {
 
     public function create (){
         $componentes = Componente::all();
-        
+
         return view('aprendiz.frmPrestamoAprendiz',compact('componentes'));
     }
-    
+
     public function indexAprendiz (){
 
         $totalRegistros = 0;
 
         $computadores = Computador::with('componentes')
                                     ->whereNotNull('documento')
-                                    ->get();
-     
-        $totalRegistros = $computadores->count();
+                                    ->paginate(10);
+
+        $totalRegistros = $computadores->total();
 
         return view('aprendiz.verPrestamosAprendiz', compact('computadores','totalRegistros'));
     }
@@ -37,10 +38,10 @@ class ComputadorController extends Controller
 
         $computadores = Computador::with('componentes')
                                     ->whereNull('documento')
-                                    ->get();
+                                    ->paginate(10);
 
-        $totalRegistros = $computadores->count();
-     
+        $totalRegistros = $computadores->total();
+
         return view('instructor.verPrestamosInstructor', compact('computadores','totalRegistros'));
     }
     public function indexGeneral (){
@@ -48,16 +49,16 @@ class ComputadorController extends Controller
         $totalRegistros = 0;
 
         $computadores = Computador::with('componentes')
-                                    ->get();
+                                    ->paginate(10);
 
-        $totalRegistros = $computadores->count();
-     
+        $totalRegistros = $computadores->total();
+
         return view('general.verPrestamosGeneral', compact('computadores','totalRegistros'));
     }
-  
+
     public function createInstructor (){
         $componentes = Componente::all();
-        
+
         return view('instructor.frmPrestamoInstructor',compact('componentes'));
     }
 
@@ -69,7 +70,7 @@ class ComputadorController extends Controller
         'nombres' => 'string',
         'serial' => 'nullable|string',
         'fecha' => 'date_format:Y-m-d H:i:s',
-        'estado' => 'max:1', 
+        'estado' => 'max:1',
     ]);
 
     $fecha = $request->input('fecha');
@@ -107,7 +108,7 @@ public function entregar ($id){
     $computador->save();
     return redirect()->route('index')->with('success', 'El préstamo fue entregado correctamente.');
 }
-    
+
 public function indexAprendizAlDia(){
 
     // Obtener la fecha de hoy usando Carbon
@@ -117,8 +118,8 @@ public function indexAprendizAlDia(){
     // Consulta para obtener los computadores de hoy
     $computadores = Computador::whereDate('fecha', $fechaHoy)
                               ->whereNotNull('documento')
-                              ->with('componentes') 
-                              ->get();
+                              ->with('componentes')
+                              ->paginate(10);
 
     $totalRegistros = $computadores->count();
 
@@ -134,8 +135,8 @@ public function indexInstructorAlDia(){
     // Consulta para obtener los computadores de hoy
     $computadores = Computador::whereDate('fecha', $fechaHoy)
                               ->whereNull('documento')
-                              ->with('componentes') 
-                              ->get();
+                              ->with('componentes')
+                              ->paginate(10);
 
     $totalRegistros = $computadores->count();
 
@@ -156,7 +157,7 @@ public function entregarAprendiz(Request $request){
     $computadores = Computador::where('documento', $documento)
                               ->whereDate('fecha', $fechaHoy)
                               ->where('estado', true)
-                              ->get(); // Usamos get() para obtener una colección de resultados
+                              ->paginate(10); // Usamos paginate(10) para obtener una colección de resultados
 
     return view('aprendiz.entregarPrestamoAprendiz',compact('computadores'));
 }
@@ -175,7 +176,7 @@ public function entregarInstructor(Request $request)
     $computadores = Computador::where('nombres','LIKE' ,"%$nombres%")
                               ->whereDate('fecha', $fechaHoy)
                               ->where('estado', true)
-                              ->get(); // Usamos get() para obtener una colección de resultados
+                              ->paginate(10); // Usamos paginate(10) para obtener una colección de resultados
 
     return view('instructor.entregarPrestamoInstructor', compact('computadores'));
 }
@@ -198,8 +199,8 @@ public function buscarAprendiz(Request $request){
         // Consultar los computadores con la fecha seleccionada
         $computadores = Computador::whereDate('fecha', $fecha)
                                 ->whereNotNull('documento')
-                                ->with('componentes') 
-                                ->get();
+                                ->with('componentes')
+                                ->paginate(10);
 
         $totalRegistros = $computadores->count();
     }
@@ -226,8 +227,8 @@ public function buscarInstructor(Request $request){
         // Consultar los computadores con la fecha seleccionada
         $computadores = Computador::whereDate('fecha', $fecha)
                                 ->whereNull('documento')
-                                ->with('componentes') 
-                                ->get();
+                                ->with('componentes')
+                                ->paginate(10);
 
         $totalRegistros = $computadores->count();
     }
@@ -252,8 +253,8 @@ public function buscarGeneral(Request $request){
 
         // Consultar los computadores con la fecha seleccionada
         $computadores = Computador::whereDate('fecha', $fecha)
-                                ->with('componentes') 
-                                ->get();
+                                ->with('componentes')
+                                ->paginate(10);
         // Obtener el total de registros encontrados
         $totalRegistros = $computadores->count();
     }
@@ -270,7 +271,7 @@ public function aprendizPdf(Request $request)
     $computadores = Computador::whereDate('fecha', $fecha)
                               ->whereNotNull('documento')
                               ->with('componentes')
-                              ->get();
+                              ->paginate(10);
     $encabezado = "Reporte de préstamos a aprendices en la fecha: $fecha" ;
 
     //logo imagen
@@ -305,7 +306,7 @@ public function instructorPdf(Request $request)
     $computadores = Computador::whereDate('fecha', $fecha)
                               ->whereNull('documento')
                               ->with('componentes')
-                              ->get();
+                              ->paginate(10);
     $encabezado = "Reporte de préstamos a instructores en la fecha: $fecha" ;
 
     //logo imagen
@@ -339,7 +340,7 @@ public function generalPdf(Request $request)
     // Consultar los computadores con la fecha especificada
     $computadores = Computador::whereDate('fecha', $fecha)
                               ->with('componentes')
-                              ->get();
+                              ->paginate(10);
     $encabezado = "Reporte de préstamos  en la fecha: $fecha" ;
 
     //logo imagen
@@ -366,15 +367,18 @@ public function generalPdf(Request $request)
     return $pdf->stream('reporte_préstamos.pdf');
 }
 
+
 public function listadoGeneralPdf()
 {
-    // Consultar los computadores con la fecha especificada
-    $computadores = Computador::with('componentes')->get();
+    // Consultar los computadores
+    $computadores = Computador::with('componentes')->paginate(10);
 
-    $encabezado = "Reporte de préstamos";
+    $encabezado = "Reporte de préstamos general";
 
-    // Logo de la imagen
-    $logo = public_path('img/logoSena.png');
+    // Logo imagen
+    $logo = public_path('img/logoSenaa.png');
+
+
 
     // Renderizar la vista en HTML
     $html = view('pdf.listadoGeneralPdf', compact('computadores', 'encabezado', 'logo'))->render();
@@ -382,7 +386,9 @@ public function listadoGeneralPdf()
     // Configuración de DomPDF
     $options = new Options();
     $options->set('isHtml5ParserEnabled', true);
+    $options->set('isPhpEnabled', true);
     $options->set('defaultFont', 'Arial');
+
     $pdf = new Dompdf($options);
 
     // Cargar el HTML en DomPDF
@@ -395,9 +401,7 @@ public function listadoGeneralPdf()
     $pdf->render();
 
     // Enviar el PDF generado al navegador
-    return $pdf->stream('reporte_préstamos.pdf', [
-        'Content-Disposition' => 'attachment; filename="reporte_prestamos.pdf"'
-    ]);
+    return $pdf->stream('reporte_préstamos_general.pdf');
 }
 
 public function listadoInstructorPdf()
@@ -407,7 +411,7 @@ public function listadoInstructorPdf()
     // Consultar los computadores con la fecha especificada
     $computadores = Computador::whereNull('documento')
                               ->with('componentes')
-                              ->get();
+                              ->paginate(10);
     $encabezado = "Reporte de préstamos a instructores" ;
 
     //logo imagen
@@ -441,7 +445,7 @@ public function listadoAprendizPdf()
     // Consultar los computadores con la fecha especificada
     $computadores = Computador::whereNotNull('documento')
                               ->with('componentes')
-                              ->get();
+                              ->paginate(10);
     $encabezado = "Reporte de préstamos a instructores" ;
 
     //logo imagen
@@ -483,7 +487,7 @@ public function vistaPrestamoAprendiz(Request $request){
     $computadores = Computador::where('documento', $documento)
                               ->whereDate('fecha', $fechaHoy)
                               ->where('estado', true)
-                              ->get(); // Usamos get() para obtener una colección de resultados
+                              ->paginate(10); // Usamos paginate(10) para obtener una colección de resultados
 
     return view('aprendiz.indexAgregarComponenteAprendiz',compact('computadores'));
 }
@@ -501,7 +505,7 @@ public function editAprendiz ($id)
 
 public function updateAprendiz(Request $request, $id)
 {
-    
+
 
     // Obtener el computador existente
     $computador = Computador::findOrFail($id);
@@ -542,7 +546,7 @@ public function vistaPrestamoInstructor(Request $request){
     $computadores = Computador::where('nombres','LIKE' ,"%$nombres%")
                               ->whereDate('fecha', $fechaHoy)
                               ->where('estado', true)
-                              ->get(); // Usamos get() para obtener una colección de resultados
+                              ->paginate(10); // Usamos paginate(10) para obtener una colección de resultados
 
 
     return view('instructor.indexAgregarComponenteInstructor',compact('computadores'));
@@ -559,7 +563,7 @@ public function editInstructor ($id)
 
 public function updateInstructor(Request $request, $id)
 {
-    
+
 
     // Obtener el computador existente
     $computador = Computador::findOrFail($id);

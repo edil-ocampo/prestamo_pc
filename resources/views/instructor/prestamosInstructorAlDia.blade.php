@@ -1,16 +1,15 @@
 @extends('layouts.app')
 
-@section('title', 'Listado prestamos hoy')
-
 @section('style')
     <link rel="stylesheet" href="{{ asset('css/listas.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/paginacion.css') }}">
 @endsection
 
 @section('content')
 
 @section('title-section','Listado de préstamos instructores hoy')
 @section('total-prestamos')
-<div class="total-instructor">   
+<div class="total-instructor">
     <label class="label">Total de préstamos hoy:</label>
 <h1>{{ $totalRegistros }}</h1>
 </div>
@@ -66,4 +65,5 @@
             </table>
         @endif
     </div>
+    {{ $computadores->links('vendor.pagination.default') }}
 @endsection
